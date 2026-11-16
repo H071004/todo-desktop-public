@@ -1,0 +1,89 @@
+*{box-sizing:border-box}body{margin:0;padding:4px;background:transparent;color:#111;font:14px 'Segoe UI','Microsoft YaHei',sans-serif}button,input{font:inherit;color:inherit}button{border:0;background:transparent;cursor:pointer}#orb{width:40px;height:40px;background:transparent;font-size:21px;touch-action:none}#panel{width:310px;margin-top:6px;padding:10px;background:transparent;max-height:650px;overflow:auto}body.calendar #panel{width:510px}header{display:flex;justify-content:flex-end;gap:12px;font-size:11px;opacity:0}body:hover header{opacity:1}header b{display:none}nav{display:flex;gap:12px;align-items:center;margin:0 0 10px}nav button{font-size:11px;padding:4px;opacity:.6}nav .active{opacity:1}#plus{margin-left:auto;font-size:24px;opacity:1}.task{display:flex;align-items:center;gap:13px;min-height:43px}.check{width:13px;height:13px;border:1px solid #333;border-radius:3px;padding:0;flex-shrink:0;font-size:10px}.done .check{background:#333;color:white}.done .label{text-decoration:line-through;opacity:.45}.label{flex:1;overflow-wrap:anywhere}.delete{opacity:0}.task:hover .delete,.task:focus-within .delete{opacity:.6}.empty{padding:15px 0;font-size:12px}form{margin:20px 0 0 26px}input{width:100%;margin-bottom:8px;border:0;border-bottom:1px solid #3336;background:transparent;border-radius:0;padding:8px 0;min-width:0}#eventFields{display:grid;grid-template-columns:1.3fr 1fr;gap:8px;font-size:12px}#place{grid-column:1/-1}.actions{display:flex;justify-content:flex-end;gap:20px;font-size:12px;margin-top:15px}.add{font-weight:500}.month{display:flex;justify-content:space-between;align-items:center;margin:15px 0 24px}.month b{font-size:21px;font-weight:400}.week,#grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0}.week{text-align:center;font-size:10px;margin-bottom:12px}#grid>button,#grid>span{position:relative;min-height:72px;padding:9px 6px;text-align:left;font-size:12px;min-width:0;align-self:stretch}#grid>button:before,#grid>span:before{content:'';position:absolute;left:0;right:0;bottom:0;border-bottom:1px solid #2226;transform:rotate(-.6deg)}#grid>button:after,#grid>span:after{content:'';position:absolute;right:0;top:0;bottom:0;border-right:1px solid #2226;transform:rotate(.7deg)}#grid>:nth-child(even):before{transform:rotate(.7deg)}#grid>:nth-child(7n):after{display:none}#grid .selected .daynumber{border:1px solid #333;border-radius:48% 53% 47% 55%;padding:3px;margin:-4px;display:inline-block}.eventTitle{display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:8px}#dayDetail{display:block}[hidden]{display:none!important}
+/* White while interacting; pinned panels become very lightly translucent away. */
+#orb{border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,#eceff2 65%,#d5dbe1);border:1px solid #ffffffb3;box-shadow:0 2px 7px #00000018;font-size:16px;font-weight:500;font-variant-numeric:tabular-nums}
+#panel{background:rgba(255,255,255,.96);border-radius:12px;padding:14px;transition:background-color .2s,box-shadow .2s;box-shadow:0 3px 12px #0000000a}
+body.pinned.away #panel{background:rgba(255,255,255,.10);box-shadow:none;backdrop-filter:blur(1px)}
+body.pinned.away header{opacity:0}
+@media(prefers-reduced-motion:reduce){#panel{transition:none}}
+
+html,body{width:100%;height:100%;overflow:hidden}#panel{position:absolute;margin:0!important}#orb{position:absolute;left:4px;top:4px}
+
+.backCalendar{padding:5px 0;color:#82917c;font-size:11px}#dayDetail h3{font-weight:500;margin:12px 0}#dayDetail .eventRow{padding:12px 0}#dayDetail .delete{float:right}#dayDetail .meta{white-space:normal;overflow-wrap:anywhere;line-height:1.6}
+/* Warm ivory; automatic idle translucency is opt-in. */
+#panel{background:rgba(250,247,239,.98)}
+body.pinned.away #panel{background:rgba(250,247,239,.98);backdrop-filter:none}
+body.pinned.away.idle-fade-enabled #panel{background:rgba(250,247,239,.38);backdrop-filter:blur(3px)}
+#fadeToggle{font-size:10px;color:#444}
+
+#dayDetail .eventRow .delete{opacity:.6}
+
+body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;font-weight:300}
+#panel,body.pinned.away #panel,body.pinned.away.idle-fade-enabled #panel{background:transparent;box-shadow:none;backdrop-filter:none;border:0}
+header b,#fadeToggle{display:none}.english{font-family:'Segoe UI',sans-serif;font-weight:300;font-style:italic;letter-spacing:.3px}.section-head{display:flex;align-items:center;margin:25px 0 10px;font-size:11px;color:#46544a;gap:8px}.section-head span{flex:1}.section-head button{font-size:12px}.task{min-height:38px}.check{border-radius:50%}.task select{background:#f5f5ee;border:0;width:75px;font-size:10px}#taskActions{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:30px;font-size:11px;color:#4d5d52}#archive{margin-left:auto}nav{gap:5px}nav #edit{margin-left:auto}nav #plus{margin-left:0}details{margin-bottom:24px}summary{display:flex;justify-content:space-between;gap:15px;font-size:11px;cursor:pointer}details>button{font-size:11px;margin-top:18px}#sectionPrompt,.archiveConfirm{background:#f6f5ef;padding:12px;font-size:12px}.archiveConfirm button{margin:10px 0 0 12px}#grid>button:before,#grid>button:after,#grid>span:before,#grid>span:after{display:none}#grid>button,#grid>span{min-height:45px;text-align:center}.eventTitle{font-size:0;margin:5px auto 0;width:3px;height:3px;border-radius:50%;background:#4e6556}#dayDetail{display:block}
+@font-face{font-family:TodoChinese;src:url('fonts/NotoSansSC.ttf');font-weight:100 900;font-display:swap}@font-face{font-family:TodoEnglish;src:url('fonts/Roboto-Italic.ttf');font-style:italic;font-weight:100 900;font-display:swap}body{font-family:TodoChinese,'Segoe UI',sans-serif;font-weight:300}.english{font-family:TodoEnglish,'Segoe UI',sans-serif;font-style:italic;font-weight:300}
+/* Ivory surfaces; remembered idle fade remains opt-in. */
+#orb{background:radial-gradient(circle at 30% 25%,#fffdf7,#f3eee2 68%,#e5ddce);border:1px solid #fffaf0b3;color:#292720;box-shadow:0 2px 7px #29200e14}
+#panel,body.pinned.away #panel{background:rgba(250,247,239,.98);border-radius:12px;box-shadow:0 3px 12px #29200e0a;backdrop-filter:none}
+body.pinned.away.idle-fade-enabled #panel{background:rgba(250,247,239,.42);backdrop-filter:blur(3px);box-shadow:none}
+#fadeToggle{display:inline-block;font-size:10px;color:#514c42}
+header{opacity:1;flex-wrap:wrap}
+body.pinned.away header{opacity:0}
+body.pinned.away:focus-within header{opacity:1}
+
+.undo-notice{display:flex;justify-content:space-between;gap:12px;padding:10px 0;font-size:12px}.undo-notice button{text-decoration:underline}.section-head{margin-top:16px;margin-bottom:5px}
+/* Calendar event names belong inside their date cells. */
+#grid>button,#grid>span{min-height:72px;text-align:left;vertical-align:top}
+.eventTitle{display:block;font-size:10px;line-height:1.4;width:auto;height:auto;max-width:100%;margin:7px 0 0;border-radius:0;background:transparent;color:#292720;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+#lock,#fadeToggle{display:none!important}#panel,body.pinned.away #panel,body.pinned.away.idle-fade-enabled #panel{background:transparent;box-shadow:none;backdrop-filter:none;border:0;border-radius:0;padding-top:48px;transform-origin:24px 24px;transition:opacity .16s,transform .16s;opacity:0;transform:scale(.96)}body.opens-left #panel{transform-origin:calc(100% - 24px) 24px}body.expanded #panel{opacity:1;transform:scale(1)}#orb{z-index:5;transition:transform .16s}body.expanded #orb{background:transparent;border-color:transparent;box-shadow:none;transform:rotate(-35deg);font-size:27px}body.expanded.opens-left #orb{transform:rotate(35deg)}body.expanded.pinned #orb{transform:rotate(0deg)}.calendarTools{display:flex;gap:10px;justify-content:flex-end;font-size:11px}.tagPopup{background:#f7f5ee;border-radius:7px;padding:12px;margin:10px 0;font-size:11px}.tagRow{display:flex;gap:8px;align-items:center}.tagRow input[type=text]{min-width:0}.tagRow input[type=color]{width:28px;flex:none;height:28px;padding:0;border:0}.tagChoices{display:flex;gap:6px;flex-wrap:wrap}.tagChoices button{border:1px solid #a4b09f;border-radius:4px;padding:5px 8px}.tagChoices [aria-pressed=true]{background:#dfe8d9;border-color:#52654b}.eventTitle{padding:3px 4px;border-radius:3px;font-size:10px;margin-top:4px}.eventRow select{font-size:11px;background:#f7f5ee;border:0}#grid>button{vertical-align:top}header{position:absolute;top:15px;right:12px}body.opens-left header{right:55px}
+@media(prefers-reduced-motion:reduce){#panel,#orb{transition:none}}
+/* Ivory surface and optional idle translucency. */
+#orb{background:radial-gradient(circle at 30% 25%,#fffdf7,#f3eee2 68%,#e5ddce);border:1px solid #fffaf0b3;color:#292720;box-shadow:0 2px 7px #29200e14}
+#panel,body.pinned.away #panel{background:rgba(250,247,239,.98);border-radius:12px;box-shadow:0 3px 12px #29200e0a;backdrop-filter:none}
+body.pinned.away.idle-fade-enabled #panel{background:rgba(250,247,239,.48);backdrop-filter:blur(3px);box-shadow:none}
+body.expanded #orb{background:rgba(250,247,239,.98);border-color:transparent;box-shadow:none}
+body.pinned.away.idle-fade-enabled #orb{background:rgba(250,247,239,.48)}
+#fadeToggle{display:inline-block!important;font-size:10px;color:#514c42}
+#lock{display:none!important}
+header{opacity:1;flex-wrap:wrap;z-index:6}
+body.pinned.away header{opacity:0}
+body.pinned.away:focus-within header{opacity:1}
+/* Visible ivory surfaces are independent of hover/collapse state. */
+#panel,body.pinned.away #panel,body.pinned.away.idle-fade-enabled #panel{background:rgba(250,247,239,.94);backdrop-filter:blur(16px);border:1px solid #ffffff80;border-radius:12px;box-shadow:0 3px 12px #29200e10}
+body.away.idle-fade-enabled #panel{background:rgba(250,247,239,.78);backdrop-filter:blur(16px)}
+body:focus-within #panel{background:rgba(250,247,239,.94)!important}
+#fadeToggle{display:inline-block!important}body.expanded #orb{background:#f3eee2;border-color:#fffaf0b3}#inlineTagEditor{padding:8px 0}#inlineTagEditor input[type=color]{width:40px;height:30px}
+
+#orb{z-index:100;user-select:none;-webkit-app-region:no-drag}body.expanded.pinned #panel{opacity:1!important;visibility:visible!important}body.expanded.pinned #orb{outline:1px solid #9c937d}
+
+/* Fade changes the surface only; pinning continues to keep it open. */
+body.expanded.pinned #orb{outline:none}
+#panel,body.pinned.away #panel{background:rgba(250,247,239,.94)!important;backdrop-filter:blur(16px)!important}
+body.pinned.away.idle-fade-enabled #panel{background:rgba(250,247,239,.48)!important;backdrop-filter:blur(18px)!important}
+body.pinned.away.idle-fade-enabled:focus-within #panel{background:rgba(250,247,239,.48)!important}
+body.pinned.away.idle-fade-enabled:has(input:focus,textarea:focus,select:focus) #panel{background:rgba(250,247,239,.94)!important}
+
+.taskSectionBox{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0;font-size:11px}.taskSectionBox select{max-width:150px;background:#f7f5ee;border:1px solid #d9d5c9;border-radius:4px;padding:4px}.taskSectionBox button{font-size:11px}
+
+
+/* Keep archive feedback beside its action or above the History list. */
+#archive:disabled{opacity:.55;cursor:default}
+.archive-empty{align-self:center}
+.archiveConfirm{flex-basis:100%;border-radius:8px}
+.archive-controls{display:flex;justify-content:flex-end;gap:8px}
+.archiveConfirm button{margin:8px 0 0}
+.archive-error:not(:empty){margin-top:8px;color:#843828}
+.archive-status{font-size:12px;margin:0 0 14px;color:#46544a}
+.section-head .section-chip{flex:0 1 auto}
+.section-chip{border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.section-chip:not([style]){padding-inline:0}
+.section-manager{font-size:11px;margin:18px 0 0}
+.section-manager-row{display:flex;align-items:center;gap:4px;margin-top:8px}
+.section-manager-row .section-chip{margin-right:auto;min-width:0}
+#sectionPrompt input[type=color]{width:32px;height:24px;padding:0;margin:0 6px;vertical-align:middle}
+
+/* Keep the weekday labels and the calendar on the same seven-column grid. */
+.week,#grid{grid-template-columns:repeat(7,minmax(0,1fr));margin-inline:0;padding-inline:0}
+#grid>button{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;text-align:center}
+#grid .daynumber,#grid .selected .daynumber{position:relative;display:block;align-self:center;flex:0 0 22px;line-height:22px;padding:0;margin:0;border:0}
+#grid .selected .daynumber::after{content:'';position:absolute;inset:0 -5px;border:1px solid #333;border-radius:48% 53% 47% 55%;pointer-events:none}
+#grid>button>.eventTitle{flex-shrink:0;text-align:left}

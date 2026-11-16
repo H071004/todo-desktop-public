@@ -1,0 +1,13 @@
+{
+  "name": "floating-todo-widget",
+  "version": "1.0.0-preview.6",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^40.0.0"
+  },
+  "license": "MIT"
+}
